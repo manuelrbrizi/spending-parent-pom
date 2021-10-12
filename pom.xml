@@ -8,7 +8,7 @@
 
 	<groupId>8047b9c3-dd3a-4b49-b414-136f87448c77</groupId>
 	<artifactId>parent-pom</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
 
 	<name>parent-pom</name>
@@ -20,6 +20,14 @@
 		<deployment.suffix>-${mule.env}</deployment.suffix>
 		<deployment.name>${project.artifactId}${deployment.suffix}</deployment.name>
 		<app.runtime>4.3.0</app.runtime>
+		<mule.region>${region}<!-- us-east-2 --></mule.region>
+		<mule.workers>${workers}<!-- 1 --></mule.workers>
+		<mule.workerType>${workerType}<!-- MICRO --></mule.workerType>
+		<mule.appName>${appName}<!-- Spending API --></mule.appName>
+		<mule.businessGroup>${businessGroup}</mule.businessGroup>
+		<mule.environment>${environment}</mule.environment>
+		<ap.username>${username}</ap.username>
+		<ap.password>${password}</ap.password>
 
 		<!-- plugin / dependency version definition -->
 		<maven.clean.plugin.version>3.0.0</maven.clean.plugin.version>
@@ -59,17 +67,26 @@
 					<extensions>true</extensions>
 					<configuration>
 						<cloudHubDeployment>
-							<server>cloudhub</server>
-							<businessGroup />
-							<environment>${mule.env}</environment>
-							<region>us-east-2</region>
+							<businessGroupId>${project.groupId}</businessGroupId>
+							<businessGroup>${mule.businessGroup}</businessGroup>
+							<environment>${mule.environment}</environment>
+							<connectedAppClientId>${client.app.id}</connectedAppClientId>
+							<connectedAppClientSecret>${client.app.secret}</connectedAppClientSecret>
+							<connectedAppGrantType>client_credentials</connectedAppGrantType>
+							<properties>
+								<mule.env>${mule.env}</mule.env>
+								<mule.key>${mule.key}</mule.key>
+								<anypoint.platform.client_id>${anypoint.platform.client_id}</anypoint.platform.client_id>
+								<anypoint.platform.client_secret>${anypoint.platform.client_secret}</anypoint.platform.client_secret>
+							</properties>
+							<region>${mule.region}</region>
 							<muleVersion>${app.runtime}</muleVersion>
 							<applyLatestRuntimePatch>true</applyLatestRuntimePatch>
-							<workers>1</workers>
-							<workerType>MICRO</workerType>
+							<workers>${mule.workers}</workers>
+							<workerType>${mule.workerType}</workerType>
 							<objectStoreV2>true</objectStoreV2>
-							<applicationName>Spending API</applicationName>
-							<deploymentTimeout>600000</deploymentTimeout>
+							<applicationName>${mule.appName}</applicationName>
+							<deploymentTimeout>2400000</deploymentTimeout>
 						</cloudHubDeployment>
 					</configuration>
 				</plugin>
@@ -129,7 +146,7 @@
 		<repository>
 			<id>Repository</id>
 			<name>Corporate Repository</name>
-			<url>https://maven.gov.anypoint.mulesoft.com/api/v2/organizations/${project.groupId}/maven</url>
+			<url>https://maven.anypoint.mulesoft.com/api/v2/organizations/${project.groupId}/maven</url>
 			<layout>default</layout>
 		</repository>
 	</distributionManagement>
