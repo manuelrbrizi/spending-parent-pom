@@ -20,14 +20,15 @@
 		<deployment.suffix>-${mule.env}</deployment.suffix>
 		<deployment.name>${project.artifactId}${deployment.suffix}</deployment.name>
 		<app.runtime>4.3.0</app.runtime>
+		<app.runtime.semver>4.3.0</app.runtime.semver>
 		<mule.region>${region}<!-- us-east-2 --></mule.region>
 		<mule.workers>${workers}<!-- 1 --></mule.workers>
 		<mule.workerType>${workerType}<!-- MICRO --></mule.workerType>
 		<mule.appName>${appName}<!-- Spending API --></mule.appName>
 		<mule.businessGroup>${businessGroup}</mule.businessGroup>
 		<mule.environment>${environment}</mule.environment>
-		<ap.username>${username}</ap.username>
-		<ap.password>${password}</ap.password>
+		<mule.username>${username}</mule.username>
+		<mule.password>${password}</mule.password>
 
 		<!-- plugin / dependency version definition -->
 		<maven.clean.plugin.version>3.0.0</maven.clean.plugin.version>
@@ -70,9 +71,8 @@
 							<businessGroupId>${project.groupId}</businessGroupId>
 							<businessGroup>${mule.businessGroup}</businessGroup>
 							<environment>${mule.environment}</environment>
-							<connectedAppClientId>${client.app.id}</connectedAppClientId>
-							<connectedAppClientSecret>${client.app.secret}</connectedAppClientSecret>
-							<connectedAppGrantType>client_credentials</connectedAppGrantType>
+							<username>${mule.username}</username>
+							<password>${mule.password}</password>
 							<properties>
 								<mule.env>${mule.env}</mule.env>
 								<mule.key>${mule.key}</mule.key>
