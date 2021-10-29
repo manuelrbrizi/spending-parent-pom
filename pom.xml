@@ -31,6 +31,7 @@
 		<mule.password>${password}</mule.password>
 
 		<!-- plugin / dependency version definition -->
+		<munit.version>2.3.6</munit.version>
 		<maven.clean.plugin.version>3.0.0</maven.clean.plugin.version>
 		<mule.maven.plugin.version>3.5.2</mule.maven.plugin.version>
 		<mule.http.connector.version>1.5.25</mule.http.connector.version>
@@ -39,6 +40,7 @@
 		<mule.sockets.connector.version>1.2.2</mule.sockets.connector.version>
 		<mule.apikit.module.version>1.5.4</mule.apikit.module.version>
 		<mule.secure.properties.version>1.2.3</mule.secure.properties.version>
+		<mule.assertions.version>1.0.2</mule.assertions.version>
 	</properties>
 
 	<build>
@@ -54,44 +56,42 @@
 				<filtering>true</filtering>
 			</testResource>
 		</testResources>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>${maven.clean.plugin.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.mule.tools.maven</groupId>
-					<artifactId>mule-maven-plugin</artifactId>
-					<version>${mule.maven.plugin.version}</version>
-					<extensions>true</extensions>
-					<configuration>
-						<cloudHubDeployment>
-							<businessGroupId>${project.groupId}</businessGroupId>
-							<businessGroup>${mule.businessGroup}</businessGroup>
-							<environment>${mule.environment}</environment>
-							<username>${mule.username}</username>
-							<password>${mule.password}</password>
-							<properties>
-								<mule.env>${mule.env}</mule.env>
-								<mule.key>${mule.key}</mule.key>
-								<anypoint.platform.client_id>${anypoint.platform.client_id}</anypoint.platform.client_id>
-								<anypoint.platform.client_secret>${anypoint.platform.client_secret}</anypoint.platform.client_secret>
-							</properties>
-							<region>${mule.region}</region>
-							<muleVersion>${app.runtime}</muleVersion>
-							<applyLatestRuntimePatch>true</applyLatestRuntimePatch>
-							<workers>${mule.workers}</workers>
-							<workerType>${mule.workerType}</workerType>
-							<objectStoreV2>true</objectStoreV2>
-							<applicationName>${mule.appName}</applicationName>
-							<deploymentTimeout>2400000</deploymentTimeout>
-						</cloudHubDeployment>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${maven.clean.plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>${mule.maven.plugin.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<cloudHubDeployment>
+						<businessGroupId>${project.groupId}</businessGroupId>
+						<businessGroup>${mule.businessGroup}</businessGroup>
+						<environment>${mule.environment}</environment>
+						<username>${mule.username}</username>
+						<password>${mule.password}</password>
+						<properties>
+							<mule.env>${mule.env}</mule.env>
+							<mule.key>${mule.key}</mule.key>
+							<anypoint.platform.client_id>${anypoint.platform.client_id}</anypoint.platform.client_id>
+							<anypoint.platform.client_secret>${anypoint.platform.client_secret}</anypoint.platform.client_secret>
+						</properties>
+						<region>${mule.region}</region>
+						<muleVersion>${app.runtime}</muleVersion>
+						<applyLatestRuntimePatch>true</applyLatestRuntimePatch>
+						<workers>${mule.workers}</workers>
+						<workerType>${mule.workerType}</workerType>
+						<objectStoreV2>true</objectStoreV2>
+						<applicationName>${mule.appName}</applicationName>
+						<deploymentTimeout>2400000</deploymentTimeout>
+					</cloudHubDeployment>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 	<dependencies>
@@ -124,6 +124,26 @@
 			<artifactId>mule-secure-configuration-property-module</artifactId>
 			<version>${mule.secure.properties.version}</version>
 			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.mulesoft.munit</groupId>
+			<artifactId>munit-runner</artifactId>
+			<version>${munit.version}</version>
+			<classifier>mule-plugin</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.mulesoft.munit</groupId>
+			<artifactId>munit-tools</artifactId>
+			<version>${munit.version}</version>
+			<classifier>mule-plugin</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.weave</groupId>
+			<artifactId>assertions</artifactId>
+			<version>${mule.assertions.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
